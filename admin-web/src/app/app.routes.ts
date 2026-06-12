@@ -7,6 +7,7 @@ import { SizeList } from './features/sizes/pages/size-list/size-list';
 import { ProductList } from './features/products/pages/product-list/product-list';
 import { ProductCreate } from './features/products/pages/product-create/product-create';
 import { ProductEdit } from './features/products/pages/product-edit/product-edit';
+import { InventoryList } from './features/inventory/pages/inventory-list/inventory-list';
 
 export const appRoutes: Route[] = [
   {
@@ -53,6 +54,10 @@ export const appRoutes: Route[] = [
       {
       path: 'products/edit/:id',
       component: ProductEdit,
+      },
+      {
+      path: 'inventory',
+      component: InventoryList,
       },
     ],
   },

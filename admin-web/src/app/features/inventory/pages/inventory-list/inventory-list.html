@@ -1,0 +1,64 @@
+<h1>Inventario</h1>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>Referencia</th>
+      <th>Producto</th>
+      <th>Color</th>
+      <th>Talla</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (
+      detail of productDetailStore.productDetails();
+      track detail.product.id
+    ) {
+
+      @for (
+        color of detail.colors;
+        track color.id
+      ) {
+
+        @for (
+          inventory of color.inventories;
+          track inventory.sizeId
+        ) {
+
+          <tr>
+
+            <td>
+              {{ detail.product.reference }}
+            </td>
+
+            <td>
+              {{ detail.product.name }}
+            </td>
+
+            <td>
+              {{ color.colorName }}
+            </td>
+
+            <td>
+              {{ inventory.sizeCode }}
+            </td>
+
+            <td>
+              {{ inventory.quantity }}
+            </td>
+
+          </tr>
+
+        }
+
+      }
+
+    }
+
+  </tbody>
+
+</table>

@@ -7,17 +7,20 @@ import {
   FormsModule,
 } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 import { CategoryService } from '../../../categories/services/category.service';
 import { Category } from '../../../../core/models/category.model';
 
 import { SizeService } from '../../../sizes/services/size.service';
 import { Size } from '../../../../core/models/size.model';
 
+import { Product } from '../../../../core/models/product.model';
+
 import { ProductColorStock } from '../../models/product-color-stock.model';
 
-import { Product } from '../../../../core/models/product.model';
 import { ProductStore } from '../../state/product.store';
-import { Router } from '@angular/router';
+import { ProductDetailStore } from '../../state/product-detail.store';
 
 @Component({
   selector: 'app-product-create',
@@ -33,7 +36,11 @@ export class ProductCreate implements OnInit {
 
   private readonly categoryService = inject(CategoryService);
   private readonly sizeService = inject(SizeService);
+
   private readonly productStore = inject(ProductStore);
+  private readonly productDetailStore =
+    inject(ProductDetailStore);
+
   private readonly router = inject(Router);
 
   categories: Category[] = [];
@@ -52,35 +59,42 @@ export class ProductCreate implements OnInit {
   });
 
   ngOnInit(): void {
-    this.categories = this.categoryService.getAll();
+    this.categories =
+      this.categoryService.getAll();
 
-    this.sizes = this.sizeService.getAll();
+    this.sizes =
+      this.sizeService.getAll();
   }
 
   save(): void {
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    return;
-  }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-  const product: Product = {
-    id: crypto.randomUUID(),
-    reference: this.form.value.reference ?? '',
-    name: this.form.value.name ?? '',
-    categoryId: this.form.value.categoryId ?? '',
-    description: this.form.value.description ?? '',
-    imageUrl: this.form.value.imageUrl ?? '',
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+    const product: Product = {
+      id: crypto.randomUUID(),
+      reference: this.form.value.reference ?? '',
+      name: this.form.value.name ?? '',
+      categoryId: this.form.value.categoryId ?? '',
+      description: this.form.value.description ?? '',
+      imageUrl: this.form.value.imageUrl ?? '',
+      isActive: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
 
-  this.productStore.addProduct(product);
+    this.productStore.addProduct(product);
 
-  console.log('Producto:', product);
-  console.log('Colores:', this.productColors);
+    this.productDetailStore.addProductDetail({
+      product,
+      colors: this.productColors,
+    });
 
-  this.router.navigate(['/products']);
+    console.log('Producto:', product);
+    console.log('Colores:', this.productColors);
+
+    this.router.navigate(['/products']);
   }
 
   addColor(): void {
