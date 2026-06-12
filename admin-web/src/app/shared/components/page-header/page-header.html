@@ -1,0 +1,11 @@
+<div class="page-header">
+  <div>
+    <h1>{{ title() }}</h1>
+  </div>
+
+  @if (buttonText()) {
+  <button (click)="buttonClick.emit()">
+  {{ buttonText() }}
+  </button>
+  }
+</div>

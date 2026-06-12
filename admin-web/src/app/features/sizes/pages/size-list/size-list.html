@@ -1,0 +1,14 @@
+<app-page-header
+  title="Tallas"
+  buttonText="Nueva Talla">
+</app-page-header>
+
+<p>Total tallas: {{ sizeStore.totalSizes() }}</p>
+
+<ul>
+  @for (size of sizeStore.sizes(); track size.id) {
+    <li>
+      Talla {{ size.code }}
+    </li>
+  }
+</ul>

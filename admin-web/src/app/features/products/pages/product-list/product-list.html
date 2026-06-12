@@ -1,0 +1,56 @@
+<app-page-header
+  title="Productos"
+  buttonText="Nuevo Producto"
+  (buttonClick)="goToCreate()">
+</app-page-header>
+
+<p>Total productos: {{ productStore.totalProducts() }}</p>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>Referencia</th>
+      <th>Nombre</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (product of productStore.products(); track product.id) {
+
+      <tr>
+
+        <td>{{ product.reference }}</td>
+
+        <td>{{ product.name }}</td>
+
+        <td>
+          {{ product.isActive ? 'Activo' : 'Inactivo' }}
+        </td>
+
+        <td>
+
+        <button
+        type="button"
+        (click)="editProduct(product.id)">
+        Editar
+        </button>
+
+        <button
+        type="button"
+        (click)="deleteProduct(product.id)">
+        Eliminar
+        </button>
+
+        </td>
+
+      </tr>
+
+    }
+
+  </tbody>
+
+</table>

@@ -1,0 +1,48 @@
+@if (product) {
+
+<h1>Editar Producto</h1>
+
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()">
+
+  <div>
+    <label for="reference">
+      Referencia
+    </label>
+
+    <input
+      id="reference"
+      type="text"
+      formControlName="reference">
+  </div>
+
+  <div>
+    <label for="name">
+      Nombre
+    </label>
+
+    <input
+      id="name"
+      type="text"
+      formControlName="name">
+  </div>
+
+  <div>
+    <label for="description">
+      Descripción
+    </label>
+
+    <textarea
+      id="description"
+      formControlName="description">
+    </textarea>
+  </div>
+
+  <button type="submit">
+    Guardar Cambios
+  </button>
+
+</form>
+
+}

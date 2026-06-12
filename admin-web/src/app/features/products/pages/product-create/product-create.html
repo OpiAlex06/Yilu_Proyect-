@@ -1,0 +1,125 @@
+<h1>Nuevo Producto</h1>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <div>
+    <label for="reference">Referencia</label>
+    <input
+      id="reference"
+      type="text"
+      formControlName="reference">
+  </div>
+
+  <div>
+    <label for="name">Nombre</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name">
+  </div>
+
+  <div>
+    <label for="categoryId">Categoría</label>
+
+    <select
+      id="categoryId"
+      formControlName="categoryId">
+
+      <option value="">
+        Seleccione una categoría
+      </option>
+
+      @for (category of categories; track category.id) {
+        <option [value]="category.id">
+          {{ category.name }}
+        </option>
+      }
+
+    </select>
+  </div>
+
+  <div>
+    <label for="colorName">Color</label>
+
+    <input
+      id="colorName"
+      type="text"
+      [(ngModel)]="colorName"
+      [ngModelOptions]="{ standalone: true }">
+
+    <button
+      type="button"
+      (click)="addColor()">
+      Agregar Color
+    </button>
+  </div>
+
+  @if (productColors.length > 0) {
+    <h3>Colores agregados</h3>
+  }
+
+  <ul>
+
+    @for (color of productColors; track color.id) {
+
+      <li>
+
+        <strong>{{ color.colorName }}</strong>
+
+        <button
+          type="button"
+          (click)="removeColor(color.id)">
+          X
+        </button>
+
+        <div>
+
+          @for (inventory of color.inventories; track inventory.sizeId) {
+
+            <div>
+
+              <label [for]="'size-' + color.id + '-' + inventory.sizeId">
+                Talla {{ inventory.sizeCode }}
+              </label>
+
+              <input
+                [id]="'size-' + color.id + '-' + inventory.sizeId"
+                type="number"
+                [(ngModel)]="inventory.quantity"
+                [ngModelOptions]="{ standalone: true }">
+
+            </div>
+
+          }
+
+        </div>
+
+      </li>
+
+    }
+
+  </ul>
+
+  <div>
+    <label for="description">Descripción</label>
+
+    <textarea
+      id="description"
+      formControlName="description">
+    </textarea>
+  </div>
+
+  <div>
+    <label for="imageUrl">Imagen URL</label>
+
+    <input
+      id="imageUrl"
+      type="text"
+      formControlName="imageUrl">
+  </div>
+
+  <button type="submit">
+    Guardar
+  </button>
+
+</form>

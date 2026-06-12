@@ -1,0 +1,49 @@
+<div class="shell">
+  <header class="header">
+    <div class="logo">Yilu ERP</div>
+
+    <div class="user">
+      Administrador
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <nav>
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active">
+        Dashboard
+      </a>
+
+      <a
+        routerLink="/categories"
+        routerLinkActive="active">
+        Categorías
+      </a>
+
+      <a
+      routerLink="/sizes"
+      routerLinkActive="active">
+      Tallas
+      </a>
+
+      <a
+      routerLink="/products"
+      routerLinkActive="active">
+      Productos
+      </a>
+
+
+      <a>Inventario</a>
+      <a>Ventas</a>
+      <a>Clientes</a>
+      <a>Usuarios</a>
+
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

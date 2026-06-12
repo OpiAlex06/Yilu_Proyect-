@@ -1,0 +1,13 @@
+<app-page-header
+  title="Categorías"
+  buttonText="Nueva Categoría">
+</app-page-header>
+
+<p>Total categorías: {{ categoryStore.totalCategories() }}</p>
+
+@for (category of categoryStore.categories(); track category.id) {
+  <div>
+    <h3>{{ category.name }}</h3>
+    <p>{{ category.description }}</p>
+  </div>
+}
