@@ -9,6 +9,7 @@
       <th>Color</th>
       <th>Talla</th>
       <th>Stock</th>
+      <th>Acción</th>
     </tr>
   </thead>
 
@@ -50,6 +51,21 @@
             <td>
               {{ inventory.quantity }}
             </td>
+            <td>
+            <button
+              type="button"
+              (click)="editStock(
+              detail.product.id,
+              color.id,
+              inventory.sizeId,
+              detail.product.name,
+              color.colorName,
+              inventory.sizeCode,
+              inventory.quantity
+              )">
+              Editar
+              </button>
+          </td>
 
           </tr>
 

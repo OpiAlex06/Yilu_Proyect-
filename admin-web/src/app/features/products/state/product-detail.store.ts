@@ -52,4 +52,49 @@ export class ProductDetailStore {
         detail.product.id === productId
     );
   }
+  updateInventoryQuantity(
+  productId: string,
+  colorId: string,
+  sizeId: string,
+  quantity: number
+): void {
+
+  this._productDetails.update(details =>
+    details.map(detail => {
+
+      if (detail.product.id !== productId) {
+        return detail;
+      }
+
+      return {
+        ...detail,
+        colors: detail.colors.map(color => {
+
+          if (color.id !== colorId) {
+            return color;
+          }
+
+          return {
+            ...color,
+            inventories: color.inventories.map(inventory => {
+
+              if (inventory.sizeId !== sizeId) {
+                return inventory;
+              }
+
+              return {
+                ...inventory,
+                quantity,
+              };
+
+            }),
+          };
+
+        }),
+      };
+
+    })
+  );
+
+}
 }
